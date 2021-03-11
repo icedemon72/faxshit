@@ -1,6 +1,9 @@
 .small {
     font-size: 9px;
 }
+.italic {
+    font-style: italic;
+}
 .bold {
     font-weight: bold;
 }
@@ -13,12 +16,20 @@ th, td {
 tr:last-child {
     border: 2px solid black;
     font-style: oblique;
+    font-weight: bold;
 }
 table, td, th {
     border: 1px solid black;
-  }
+}
 table {
     border-collapse: collapse;
     width: 500px;
     margin-top: 2%;
-  }
+}
+table > tbody > :first-child  {
+    font-style: italic;
+}
+
+table > tbody > tr > :first-child{
+    font-style: italic;
+}

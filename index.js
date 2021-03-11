@@ -40,6 +40,9 @@ function plus(n1, n2, arr) {//<- function that adds the numbers that were genera
     let p = ((`${n1} = (${array[0].join(', ')})<br/>${n2} = (${array[1].join(', ')})<br/>[${n1} + ${n2}]<span class='small'>(${arr.join(', ')})
                     </span> = (<span class='bold'>${array[2].join(', ')}</span>)<br/><br/>
                     Mod = ${arr.join(' &#215 ')} = <span class='bold'>${res.proizvodmod}</span><br/><br/>
+                    <span class='italic'>{Ni = Mod / mod Y}</span><br/>
+                    ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));
     return [res, p]; 
@@ -57,6 +60,9 @@ function minus(n1, n2, arr) {//<- function that subtracts the numbers that were 
     let p = ((`${n1} = (${array[0].join(', ')})<br/>${n2} = (${array[1].join(', ')})<br/>[${n1} - ${n2}]<span class='small'>(${arr.join(', ')})
                     </span> = (<span class='bold'>${array[2].join(', ')}</span>)<br/><br/>
                     Mod = ${arr.join(' &#215 ')} = <span class='bold'>${res.proizvodmod}</span><br/><br/>
+                    <span class='italic'>{Ni = Mod / mod Y}</span><br/>
+                    ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));//
     return [res, p];
@@ -74,6 +80,9 @@ function puta(n1, n2, arr) { //<- function that multiplies the numbers that were
     let  p = ((`${n1} = (${array[0].join(', ')})<br/>${n2} = (${array[1].join(', ')})<br/>[${n1} &#215 ${n2}]<span class='small'>(${arr.join(', ')})
                     </span> = (<span class='bold'>${array[2].join(', ')}</span>)<br/><br/>
                     Mod = ${arr.join(' &#215 ')} = <span class='bold'>${res.proizvodmod}</span><br/><br/>
+                    <span class='italic'>{Ni = Mod / mod Y}</span><br/>
+                    ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));
     return [res, p];
@@ -82,7 +91,7 @@ const sve = (n1, n2, arr) => [plus(n1, n2, arr), minus(n1, n2, arr.reverse()), p
 
 function buildTable(data, is, znak = [''], p){ //<- This function should parse and create a html table
     if(!is) {
-        data = [data], p = [p]; //creates arrays if there is only one input (that is, if "EVERYTHING" isnt selected)
+        data = [data], p = [p]; //creates arrays if there is only one input (that is, if 'EVERYTHING' isnt selected)
     }
     let div = document.querySelector('#rezultat'), divMeta = document.querySelector('#metadata');
     data.forEach((x, y) => {
@@ -146,7 +155,7 @@ function randF(){ //<- function that is called when the button 'calculate' or wh
     let isAll = false, znakfje;
     if(znak === 'sve') {
         isAll = true;
-        znakfje = ['+', '-', '*'];
+        znakfje = ['+', '-', 'x'];
         buildTable([res[0][0], res[1][0], res[2][0]], isAll, znakfje, [res[0][1], res[1][1], res[2][1]]);
         return 0;
     }//calling the other functions with some bullshit arguments idk 
