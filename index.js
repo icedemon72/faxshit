@@ -44,6 +44,8 @@ function plus(n1, n2, arr) {//<- function that adds the numbers that were genera
                     ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}<br/>
+                    ${res.rezultati.map((x, y) => `Rez<span class='small'>${y + 1}</span> = ${res.ostatak[y]} + ${res.ni[y]} + ${res.xi[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));
     return [res, p]; 
 }
@@ -64,6 +66,8 @@ function minus(n1, n2, arr) {//<- function that subtracts the numbers that were 
                     ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}<br/>
+                    ${res.rezultati.map((x, y) => `Rez<span class='small'>${y + 1}</span> = ${res.ostatak[y]} + ${res.ni[y]} + ${res.xi[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));//
     return [res, p];
 }
@@ -84,6 +88,8 @@ function puta(n1, n2, arr) { //<- function that multiplies the numbers that were
                     ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}<br/>
+                    ${res.rezultati.map((x, y) => `Rez<span class='small'>${y + 1}</span> = ${res.ostatak[y]} + ${res.ni[y]} + ${res.xi[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));
     return [res, p];
 }
@@ -126,14 +132,18 @@ function createTable(tableData, div, id, para) { //copied from the fuckin stacko
       });
     });
     table.setAttribute('id', `table${id + 1}`); //adding attributes (class) to tables in order to (maybe) manipulate them in css
-    let checkbox = document.getElementById('chbx');
+    let checkbox = document.getElementById('chbx'), p1 = document.createElement('p');
     if(checkbox.checked) {
         let p = document.createElement('p');
         p.innerHTML = para;
         p.classList = `para${id + 1}`;
         div.appendChild(p); //appends paragraph element before the table in order to show how the calculations were done
+        p1.innerHTML = (`<span class='italic'>Provera: <span class='bold'>${tableData[tableData.length - 1][4]} = 
+        ${tableData[tableData.length - 1][4] % tableData[tableData.length - 1][0]}(mod ${tableData[tableData.length - 1][0]})</span></span>
+        <br/><br/>`); 
     }
     div.appendChild(table);
+    if (checkbox.checked) div.appendChild(p1);
 }
 
 function randF(){ //<- function that is called when the button 'calculate' or whtvr is pressed
@@ -164,5 +174,5 @@ function randF(){ //<- function that is called when the button 'calculate' or wh
 }
 /*
 ~~Nemam jebeno pojma zasto jebeno ne radi~~ scratch that... I fucking did it
-Created by Jovan Isailovic 2021.03.05 20:46 -> 2021.03.11 17:56
+Created by Jovan Isailovic 2021.03.05 20:46 -> 2021.03.11 20:55
 */
