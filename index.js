@@ -7,15 +7,18 @@ function resCalc (ost, ni, xi, msum, arr, array) {//<- function that takes every
 }
 //
 function xiCalc(num, arrVal) { //Calculates x1, x2... xi
-    let t = (num % arrVal === 0) ? 1 : num % arrVal, i = 1;
+    let t = num % arrVal, i = 1;
     /*if(num % 2 === 0 && arrVal % 2 === 0 && arrVal > num) {
         return num;
-    }*/
-    //console.log(`t: ${t}, num: ${num}, arrVal: ${arrVal}`)
-    if(num % 2 === 0 && arrVal % 2 === 0) {
-        return num;
     }
-    if (t !== 1 || t !== 0) {
+    //console.log(`t: ${t}, num: ${num}, arrVal: ${arrVal}`)
+    if(num % arrVal === 0 || arrVal % num === 0) {
+        return 1;
+    }*/
+    if(num % arrVal === 0 || arrVal % num === 0) {
+        return 1;
+    }
+    if (t !== 1 || !t) {
         while((t * i) % arrVal !== 1) {
             i++;
             if((t * i) % arrVal === 1 || (t * i) % arrVal === 0) break; //dont touch it, it works!
@@ -42,9 +45,13 @@ function plus(n1, n2, arr) {//<- function that adds the numbers that were genera
         array[1].push(n2 % x);
         array[2].push(((n1 % x) + (n2 % x)) % x);
     });
-    //console.log(array.join("\n").split(",").join(" ")); <- !!!!!!!!!!!!!Ovde sam stao!!!!!!!!!!!!!
     let res = moduleCalc(arr, array);
-    return res; 
+    let p = ((`${n1} = (${array[0].join(', ')})<br/>${n2} = (${array[1].join(', ')})<br/>[${n1} + ${n2}]<span class='small'>(${arr.join(', ')})
+                    </span> = (<span class='bold'>${array[2].join(', ')}</span>)<br/><br/>
+                    Mod = ${arr.join(' &#215 ')} = <span class='bold'>${res.proizvodmod}</span><br/><br/>
+                    ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));
+    return [res, p]; 
 }
 
 //{'Modul Rezultat': <res>, 'mod': [<res>], 'ost': [<res>], Ni...}
@@ -57,46 +64,58 @@ function minus(n1, n2, arr) {//<- function that subtracts the numbers that were 
         array[2].push(((n1 % x) + (x - (n2 % x))) % x);
     });
     let res = moduleCalc(arr, array);
-    return res;
+    let p = ((`${n1} = (${array[0].join(', ')})<br/>${n2} = (${array[1].join(', ')})<br/>[${n1} - ${n2}]<span class='small'>(${arr.join(', ')})
+                    </span> = (<span class='bold'>${array[2].join(', ')}</span>)<br/><br/>
+                    Mod = ${arr.join(' &#215 ')} = <span class='bold'>${res.proizvodmod}</span><br/><br/>
+                    ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));//
+    return [res, p];
 }
 
 function puta(n1, n2, arr) { //<- function that multiplies the numbers that were generated when the button was pressed
     arr.reverse();
     let array = [[], [], []];
     arr.forEach(function(x) {
+        array[0].push(n1 % x);
+        array[1].push(n2 % x);
         array[2].push(((n1 % x) * (n2 % x)) % x); //remainder (with X) from the both numbers and their multiplication values
     });                                           //then that value is moduled with X
     let res = moduleCalc(arr, array);
-    return res;
+    let  p = ((`${n1} = (${array[0].join(', ')})<br/>${n2} = (${array[1].join(', ')})<br/>[${n1} &#215 ${n2}]<span class='small'>(${arr.join(', ')})
+                    </span> = (<span class='bold'>${array[2].join(', ')}</span>)<br/><br/>
+                    Mod = ${arr.join(' &#215 ')} = <span class='bold'>${res.proizvodmod}</span><br/><br/>
+                    ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
+                    Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));
+    return [res, p];
 }
 const sve = (n1, n2, arr) => [plus(n1, n2, arr), minus(n1, n2, arr.reverse()), puta(n1, n2, arr.reverse())];
 
-function buildTable(data, is, znak = ['']){ //<- This function should parse and create a html table
+function buildTable(data, is, znak = [''], p){ //<- This function should parse and create a html table
     if(!is) {
-        data = [data];
+        data = [data], p = [p]; //creates arrays if there is only one input (that is, if "EVERYTHING" isnt selected)
     }
     let div = document.querySelector('#rezultat'), divMeta = document.querySelector('#metadata');
     data.forEach((x, y) => {
         let metadata = ['mod', 'ostatak', 'ni', 'xi', 'rezultati'],
-        proizvodMod = x.proizvodmod, rezultat = x.rezultat, ostalo = x.ostalo, 
+        proizvodMod = x.proizvodmod, rezultat = x.rezulat, ostalo = x.ostalo, 
         resArr = new Array(x.mod.length); //creates an empty array that's going to hold values for the table(s)
         for (var i = 0; i < resArr.length; i++) {
             resArr[i] = new Array();
-        }
+        } 
         for(let i = 0; i < x.mod.length; i++) { 
             for(let j = 0; j < metadata.length; j++) {
                 resArr[i].push(x[metadata[j]][i]);
             }
         }
         resArr.unshift(['Mod', 'Ostatak', 'Ni', 'Xi', `Rez${znak[y]}`]), 
-        resArr.push(['  ', ' ', ' ', ' ', ' ']); //hard-coded shit 
+        resArr.push([' ', ' ', ' ', ' ', ' ']); //hard-coded shit 
         resArr[resArr.length - 1][0] = proizvodMod, 
-        resArr[resArr.length - 1][4] = rezultat; //injects results in multidimensional array
-        createTable(resArr, div, y);
+        resArr[resArr.length - 1][4] = data[y]['rezultat']; //injects results in multidimensional array
+        createTable(resArr, div, y, p[y]);
     });
     return;
 }
-function createTable(tableData, div, id) { //copied from the fuckin stackoverflow, no idea how it works... magic probs
+function createTable(tableData, div, id, para) { //copied from the fuckin stackoverflow, no idea how it works... magic probs
     let table = document.createElement('table');
     let row = {};
     let cell = {};
@@ -108,6 +127,13 @@ function createTable(tableData, div, id) { //copied from the fuckin stackoverflo
       });
     });
     table.setAttribute('id', `table${id + 1}`); //adding attributes (class) to tables in order to (maybe) manipulate them in css
+    let checkbox = document.getElementById('chbx');
+    if(checkbox.checked) {
+        let p = document.createElement('p');
+        p.innerHTML = para;
+        p.classList = `para${id + 1}`;
+        div.appendChild(p); //appends paragraph element before the table in order to show how the calculations were done
+    }
     div.appendChild(table);
 }
 
@@ -131,9 +157,12 @@ function randF(){ //<- function that is called when the button 'calculate' or wh
     let isAll = false, znakfje;
     if(znak === 'sve') {
         isAll = true;
-        znakfje = ['+', '-', '*']
+        znakfje = ['+', '-', '*'];
+        buildTable([res[0][0], res[1][0], res[2][0]], isAll, znakfje, [res[0][1], res[1][1], res[2][1]]);
+        return 0;
     }//calling the other functions with some bullshit arguments idk 
-    buildTable(res, isAll, znakfje);
+    //let data = res[0];
+    buildTable(res[0], isAll, znakfje, res[1]);
     return 0;
 }
 /*
