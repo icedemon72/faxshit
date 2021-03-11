@@ -1,21 +1,13 @@
-//const checkEmpty = (arr) => !arr.includes(1); //Self explanatory, idk why am I even writting this comment
 function resCalc (ost, ni, xi, msum, arr, array) {//<- function that takes every single function that was written before as its arguments, 
     let resArr = [];                        //and then creates an object that is going to be used for data manipulation or sum shit
     ost.forEach((x, y) => resArr.push(x * ni[y] * xi[y]));
     let res = (resArr.reduce((a, b) => a + b));
     return {'ostalo': array, 'mod': arr, 'proizvodmod': msum, 'ostatak': ost, 'ni': ni, 'xi': xi, 'rezultati': resArr, 'rezultat': res};
 }
-//
+
 function xiCalc(num, arrVal) { //Calculates x1, x2... xi
     let t = num % arrVal, i = 1;
-    /*if(num % 2 === 0 && arrVal % 2 === 0 && arrVal > num) {
-        return num;
-    }
-    //console.log(`t: ${t}, num: ${num}, arrVal: ${arrVal}`)
-    if(num % arrVal === 0 || arrVal % num === 0) {
-        return 1;
-    }*/
-    if(num % arrVal === 0 || arrVal % num === 0) {
+    if(num % arrVal === 0 || arrVal % num === 0 || (num % 2 === 0 && arrVal % 2 === 0) ) {
         return 1;
     }
     if (t !== 1 || !t) {
@@ -32,7 +24,6 @@ function moduleCalc(arr, array) { //<- function that calculates modules based on
     let Ni = [], Xi = [], ost = array[2]; //ost is remainder
     arr.forEach(x => Ni.push(moduleSum / x)); //Ni is every Mod multiplied, and then that value is divided by every single Mod
     Ni.forEach((x, y) => Xi.push(xiCalc(x, arr[y])));
-    //a = a.map(function(item) { return item == 3452 ? 1010 : item; });
     Xi = Xi.map(x => x === 0 ? 1 : x); //checks if, for some reason, Xi is 0 (it shouldnt be 0, please dont let it be 0)
     return(resCalc(ost, Ni, Xi, moduleSum, arr, array)); //calls resCalc() function (duuuh)
 }
@@ -54,7 +45,6 @@ function plus(n1, n2, arr) {//<- function that adds the numbers that were genera
     return [res, p]; 
 }
 
-//{'Modul Rezultat': <res>, 'mod': [<res>], 'ost': [<res>], Ni...}
 function minus(n1, n2, arr) {//<- function that subtracts the numbers that were generated when the button was pressed
     arr.reverse();
     let array = [[], [], []];
@@ -149,10 +139,9 @@ function randF(){ //<- function that is called when the button 'calculate' or wh
         return 0;
     }else if(modul.reduce((x, y) => x * y) > Number.MAX_SAFE_INTEGER) {
         alert('Ova kombinacija modula je prevelika!');
-        return 0;
-    }
+        return 0; 
+    }//this if statements checks if something is empty, and if it is it'll throw some random bullshit
     while(div.firstChild) div.removeChild(div.firstChild); //removes calculations from the div (if there were any)   
-    //this if statements checks if something is empty, and if it is it'll throw some random bullshit
     let res = (znak === 'plus') ? plus(num1, num2, modul) : (znak === 'minus') ? minus(num1, num2, modul) : (znak === 'puta') ? puta(num1, num2, modul) : sve(num1, num2, modul);
     let isAll = false, znakfje;
     if(znak === 'sve') {
@@ -161,11 +150,10 @@ function randF(){ //<- function that is called when the button 'calculate' or wh
         buildTable([res[0][0], res[1][0], res[2][0]], isAll, znakfje, [res[0][1], res[1][1], res[2][1]]);
         return 0;
     }//calling the other functions with some bullshit arguments idk 
-    //let data = res[0];
     buildTable(res[0], isAll, znakfje, res[1]);
     return 0;
 }
 /*
 ~~Nemam jebeno pojma zasto jebeno ne radi~~ scratch that... I fucking did it
-Created by Jovan Isailovic 2021.03.05 20:46 -> 2021.03.06 18:57
+Created by Jovan Isailovic 2021.03.05 20:46 -> 2021.03.11 17:56
 */
