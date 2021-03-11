@@ -44,7 +44,7 @@ function plus(n1, n2, arr) {//<- function that adds the numbers that were genera
                     ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
-                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}<br/>
+                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}</span><br/>
                     ${res.rezultati.map((x, y) => `Rez<span class='small'>${y + 1}</span> = ${res.ostatak[y]} &#215 ${res.ni[y]} &#215 ${res.xi[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));
     return [res, p]; 
@@ -66,7 +66,7 @@ function minus(n1, n2, arr) {//<- function that subtracts the numbers that were 
                     ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
-                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}<br/>
+                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}</span><br/>
                     ${res.rezultati.map((x, y) => `Rez<span class='small'>${y + 1}</span> = ${res.ostatak[y]} &#215 ${res.ni[y]} &#215 ${res.xi[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));//
     return [res, p];
@@ -88,7 +88,7 @@ function puta(n1, n2, arr) { //<- function that multiplies the numbers that were
                     ${res.ni.map((x, y) => `N<span class='small'>${[y + 1]}</span> = ${res.proizvodmod} / ${arr[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     <span class='italic'>{Ni Xi = 1(mod Y)}</span><br/>
                     ${res.xi.map((x, y) => `${res.ni[y]}x<span class='small'>${y + 1}</span> = 1(Mod ${arr[y]}) => Xi = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
-                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}<br/>
+                    <span class='italic'>{Rez<span class='small'>i</span> = Ostatak<span class='small'>i</span> &#215 Ni &#215 Xi}</span><br/>
                     ${res.rezultati.map((x, y) => `Rez<span class='small'>${y + 1}</span> = ${res.ostatak[y]} &#215 ${res.ni[y]} &#215 ${res.xi[y]} = <span class='bold'>${x}</span>`).join('<br/>')}<br/><br/>
                     Rezultat = (${res.rezultati.join(' + ')}) = <span class='bold'>${res.rezultat}</span>`));
     return [res, p];
